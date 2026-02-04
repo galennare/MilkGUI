@@ -7,6 +7,19 @@
     <artifactId>MilkGUI</artifactId>
     <version>4.0.4</version>
 
+    <developers>
+        <developer>
+            <name>Browsit</name>
+        </developer>
+        <developer>
+            <name>PikaMug</name>
+        </developer>
+        <developer>
+            <name>Galen Nare</name>
+            <id>gnare</id>
+        </developer>
+    </developers>
+
     <licenses>
         <license>
             <name>MIT License</name>
