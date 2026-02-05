@@ -6,19 +6,11 @@
 
 ## Depend
 ```xml
-   <repositories>
-        <repository>
-            <id>codemc-repo</id>
-            <url>https://repo.codemc.io/repository/maven-public/</url>
-        </repository>
-   </repositories>
-```
-```xml
     <dependencies>
         <dependency>
-            <groupId>org.browsit</groupId>
+            <groupId>com.voxelforged</groupId>
             <artifactId>MilkGUI</artifactId>
-            <version>4.0.3</version>
+            <version>4.0.4</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

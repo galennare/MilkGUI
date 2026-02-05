@@ -72,39 +72,38 @@ public enum MilkGUI implements Listener {
     
     public boolean isBelow113() {
         if (bukkitVersion.matches("^[0-9.]+$")) {
-            switch(bukkitVersion) {
-            case "1.12.2" :
-            case "1.12.1" :
-            case "1.12" :
-            case "1.11.2" :
-            case "1.11.1" :
-            case "1.11" :
-            case "1.10.2" :
-            case "1.10.1" :
-            case "1.10" :
-            case "1.9.4" :
-            case "1.9.3" :
-            case "1.9.2" :
-            case "1.9.1" :
-            case "1.9" :
-            case "1.8.9" :
-            case "1.8.8" :
-            case "1.8.7" :
-            case "1.8.6" :
-            case "1.8.5" :
-            case "1.8.4" :
-            case "1.8.3" :
-            case "1.8.2" :
-            case "1.8.1" :
-            case "1.8" :
-            case "1.7.10" :
-            case "1.7.9" :
-            case "1.7.2" :
-                return true;
-            default:
-                // Bukkit version is 1.13+ or unsupported
-                return false;
-            }
+            return switch (bukkitVersion) {
+                case "1.12.2",
+                     "1.12.1",
+                     "1.12",
+                     "1.11.2",
+                     "1.11.1",
+                     "1.11",
+                     "1.10.2",
+                     "1.10.1",
+                     "1.10",
+                     "1.9.4",
+                     "1.9.3",
+                     "1.9.2",
+                     "1.9.1",
+                     "1.9",
+                     "1.8.9",
+                     "1.8.8",
+                     "1.8.7",
+                     "1.8.6",
+                     "1.8.5",
+                     "1.8.4",
+                     "1.8.3",
+                     "1.8.2",
+                     "1.8.1",
+                     "1.8",
+                     "1.7.10",
+                     "1.7.9",
+                     "1.7.2" -> true;
+                default ->
+                    // Bukkit version is 1.13+ or unsupported
+                    false;
+            };
         }
         Bukkit.getLogger().severe("MilkGUI received invalid Bukkit version " + bukkitVersion);
         return false;
