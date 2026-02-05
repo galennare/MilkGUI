@@ -6,6 +6,17 @@
     <groupId>com.voxelforged</groupId>
     <artifactId>MilkGUI</artifactId>
     <version>4.0.4</version>
+    <packaging>jar</packaging>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>MilkGUI is an easy-to-use, modern GUI library for Spigot plugins.</description>
+    <url>https://gitlab.com/VoxelForged/milkgui</url>
+
+    <scm>
+        <connection>scm:git:git@gitlab.com:voxelforged/MilkGUI.git</connection>
+        <developerConnection>scm:git:git@gitlab.com:voxelforged/MilkGUI.git</developerConnection>
+        <url>https://gitlab.com/VoxelForged/milkgui</url>
+    </scm>
 
     <developers>
         <developer>
@@ -46,12 +57,12 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.20.6-R0.1-SNAPSHOT</version>
+            <version>1.20.6-R0.1-20240613.150924-57</version>
         </dependency>
         <dependency>
             <groupId>net.wesjd</groupId>
             <artifactId>anvilgui</artifactId>
-            <version>1.10.11-SNAPSHOT</version>
+            <version>1.10.11-20251225.065250-1</version>
         </dependency>
     </dependencies>
 
@@ -76,33 +87,56 @@
         </resources>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.3</version>
-                <!-- Do not include the <configuration>...</configuration> part if you are using Sponge! -->
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.10.0</version>
+                <extensions>true</extensions>
                 <configuration>
-                    <artifactSet>
-                        <includes>
-                            <include>net.wesjd:anvilgui</include>
-                            <include>org.browsit:MilkGUI</include>
-                        </includes>
-                    </artifactSet>
-                    <relocations>
-                        <relocation>
-                            <pattern>net.wesjd</pattern>
-                            <shadedPattern>net.wesjd</shadedPattern>
-                        </relocation>
-                    </relocations>
+                    <excludeArtifacts>
+                        <excludeArtifact>original*.jar</excludeArtifact>
+                    </excludeArtifacts>
+                    <checksums>all</checksums>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <id>attach-sources</id>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>jar</goal>
                         </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.10.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -110,8 +144,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.9.1-SNAPSHOT</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
